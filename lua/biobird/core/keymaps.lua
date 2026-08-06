@@ -18,22 +18,6 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- Keybind to enter File Explorer
 vim.keymap.set('n', '<leader>fe', '<cmd>Ex<CR>', { desc = 'Opens [F]ile [E]xplore' })
 
--- Disabling arrow keys
-vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
-vim.keymap.set('v', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('v', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('v', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('v', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
-vim.keymap.set('i', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('i', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('i', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('i', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
 -- Adding the ability to move while in insert mode
 vim.keymap.set('i', '<M-h>', '<Left>', { desc = 'Move the cursor left' })
 vim.keymap.set('i', '<M-k>', '<Up>', { desc = 'Move the cursor up' })
@@ -79,6 +63,18 @@ vim.keymap.set('n', '<leader>tn', function() --toggle relative vs absolute line 
     vim.wo.relativenumber = true
   end
 end, { desc = '[T]oggle [N]umbers setting' })
+
+local transparent = false
+vim.keymap.set("n", "<leader>tt", function()
+    if not transparent then
+        vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
+        vim.cmd("hi NonText guibg=NONE ctermbg=NONE")
+        transparent = true
+    else
+        vim.cmd("colorscheme " .. vim.g.colors_name) -- Resets to your theme's background
+        transparent = false
+    end
+end, { desc = "Toggle transparent background" })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`

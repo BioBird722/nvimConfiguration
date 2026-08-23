@@ -64,18 +64,6 @@ vim.keymap.set('n', '<leader>tn', function() --toggle relative vs absolute line 
   end
 end, { desc = '[T]oggle [N]umbers setting' })
 
-local transparent = false
-vim.keymap.set("n", "<leader>tt", function()
-    if not transparent then
-        vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
-        vim.cmd("hi NonText guibg=NONE ctermbg=NONE")
-        transparent = true
-    else
-        vim.cmd("colorscheme " .. vim.g.colors_name) -- Resets to your theme's background
-        transparent = false
-    end
-end, { desc = "Toggle transparent background" })
-
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 -- Highlight when yanking (copying) text
